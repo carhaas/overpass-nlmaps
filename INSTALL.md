@@ -1,6 +1,9 @@
 For the NLmaps backend installation run: cmake . && make
 
-Required dependencies are: zlib and Boost (regex, filesystem, program_options & system)
+Required dependencies are: cmake, g++, expat, zlib and Boost (regex, filesystem, program_options & system)
+For example on Ubuntu:
+
+    sudo apt-get install g++ cmake expat libexpat1-dev zlib1g-dev libboost-all-dev
 
 For instructions to populate the database see: http://wiki.openstreetmap.org/wiki/Overpass_API/Installation#Populating_the_DB
 
