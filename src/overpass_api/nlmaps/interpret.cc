@@ -459,7 +459,7 @@ class Element : public Expression {
   bool search;
   bool center;
 public:
-	Element(list<Nwr*> nwrs, list<AreaMRL*> areas = NULL,
+	Element(list<Nwr*> nwrs, list<AreaMRL*> areas,
           bool search = false,  bool center = false) {
     this->nwrs = nwrs;
     this->areas = areas;
