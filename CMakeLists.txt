@@ -1,10 +1,12 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(osm)
 
 set(CMAKE_CXX_FLAGS "-Wall -std=c++11 -O3 -g")
+set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lrt -ldl")
 
 find_package(ZLIB REQUIRED)
 find_package(Boost COMPONENTS regex filesystem program_options system REQUIRED)
+find_package(EXPAT)
 
 LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -20,6 +22,7 @@ INCLUDE_DIRECTORIES(utils)
 INCLUDE_DIRECTORIES(src/overpass_api/data)
 INCLUDE_DIRECTORIES(src/overpass_api/statements)
 INCLUDE_DIRECTORIES(${ZLIB_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${EXPAT_INCLUDE_DIRS})
 
 
 set(osm_nlmaps_STAT_SRCS
@@ -77,4 +80,4 @@ target_link_libraries(osm_nlmaps)
 set(query_db_SRCS
     src/overpass_api/nlmaps/query_db.cc)
 add_executable(query_db ${query_db_SRCS})
-target_link_libraries(query_db expat osm_nlmaps ${Boost_LIBRARIES} ${ZLIB_LIBRARIES})
+target_link_libraries(query_db expat osm_nlmaps ${Boost_LIBRARIES} ${ZLIB_LIBRARIES} ${EXPAT_LIBRARIES})
