@@ -1,6 +1,7 @@
 For the NLmaps backend installation run: cmake . && make
 
-Required dependencies are: cmake, g++, expat, zlib and Boost (regex, filesystem, program_options & system)
+Required dependencies are: cmake, g++, expat, zlib and Boost (regex, filesystem, program_options & system).
+
 For example on Ubuntu:
 
     sudo apt-get install g++ cmake expat libexpat1-dev zlib1g-dev libboost-all-dev
