@@ -1,0 +1,378 @@
+[S] ||| [X,1]
+[S] ||| dist( [X,1] , unit( [KMMI,2] ) )
+[S] ||| dist( [X,1] , [X,2] , unit( [KMMI,3] ) )
+[S] ||| dist( [X,1] )
+[S] ||| dist( [X,1] , [X,2] )
+[S] ||| dist( [X,1] , for( ' [CW,2] ' ) )
+[S] ||| dist( [X,1] , [X,2] , for( ' [CW,3] ' ) )
+[X] ||| query( north( [AROUND,1] ) , [META,2] )
+[X] ||| query( north( [QUERY,1] ) , [META,2] )
+[X] ||| query( west( [AROUND,1] ) , [META,2] )
+[X] ||| query( west( [QUERY,1] ) , [META,2] )
+[X] ||| query( south( [AROUND,1] ) , [META,2] )
+[X] ||| query( south( [QUERY,1] ) , [META,2] )
+[X] ||| query( east( [AROUND,1] ) , [META,2] )
+[X] ||| query( east( [QUERY,1] ) , [META,2] )
+[X] ||| query( [AROUND,1] , [META,2] )
+[X] ||| query( [QUERY,1] , [META,2] )
+[AROUND] ||| around( center( [QUERY,1] ) , search( [QUERY,2] ) , maxdist( [DIST,3] ) )
+[AROUND] ||| around( center( [QUERY,1] ) , search( [QUERY,2] ) , maxdist( [DIST,3] ) , [META_TOPX,4] )
+[QUERY] ||| [AREA,1] , [OSM,2] 
+[QUERY] ||| [OSM,1]
+[META] ||| qtype( [META_REQ,1] )
+[META] ||| qtype( [META_POS,1] )
+[META_REQ] ||| [META_REQ,1] , [META_REQ,2] 
+[META_REQ] ||| [META_REQ,1] , [META_POS,2] 
+[META_REQ] ||| findkey( and( ' [KEY,1] ' , ' [KEY,2] ' ) )
+[META_REQ] ||| findkey( ' [KEY,1] ' )
+[META_REQ] ||| findkey( ' [KEY,1] ' , [META_TOPX,2] )
+[META_REQ] ||| count
+[META_REQ] ||| latlong
+[META_REQ] ||| latlong( [META_TOPX,1] )
+[META_REQ] ||| least( [META_TOPX,1] )
+[META_POS] ||| nodup( [META_REQ,1] )
+[META_TOPX] ||| topx( [INT,1] )
+[AREA] ||| area( [INNER,1] )
+[OSM] ||| nwr( [INNER,1] )
+[OSM] ||| nwr( [INNER,1] ) , [OSM,2]
+[INNER] ||| and( [INNER,1] , [INNER,2] )
+[INNER] ||| or( [INNER,1] , [INNER,2] )
+[INNER] ||| keyval( ' [KEY,1] ' , [VAL,2] ) , [INNER,3]
+[INNER] ||| keyval( ' [KEY,1] ' , [VAL,2] )
+[CW] ||| car
+[CW] ||| walk
+[KMMI] ||| km 
+[KMMI] ||| mi
+[DIST] ||| WALKDING_DIST
+[DIST] ||| DIST_INTOWN
+[DIST] ||| DIST_OUTTOWN 
+[DIST] ||| DIST_DAYTRIP
+[DIST] ||| [INT,1]
+[VAL] ||| or( [VAL,1] , [VAL,2] )
+[VAL] ||| and( [VAL,1] , [VAL,2] )
+[VAL] ||| ' valvariable '
+[KEY] ||| ' keyvariable '
+[KEY] ||| monitoring:bicycle
+[KEY] ||| fuel:diesel
+[KEY] ||| product
+[KEY] ||| social_facility:for
+[KEY] ||| hazard
+[KEY] ||| memorial:type
+[KEY] ||| person:date_of_birth
+[KEY] ||| Schalansky_ref
+[KEY] ||| tower:type
+[KEY] ||| sports
+[KEY] ||| school:de
+[KEY] ||| artwork_type
+[KEY] ||| artist_name
+[KEY] ||| fire_hydrant:type
+[KEY] ||| communication:mobile_phone
+[KEY] ||| advertising
+[KEY] ||| organic
+[KEY] ||| artwork:group
+[KEY] ||| collection_times
+[KEY] ||| abandoned:tourism
+[KEY] ||| network
+[KEY] ||| manufacturer
+[KEY] ||| generator:source
+[KEY] ||| station
+[KEY] ||| roof:colour
+[KEY] ||| internet_access:fee
+[KEY] ||| country
+[KEY] ||| shelter_type
+[KEY] ||| recycling:glass
+[KEY] ||| second_hand
+[KEY] ||| recycling:clothes
+[KEY] ||| ruins
+[KEY] ||| brand
+[KEY] ||| bicycle_parking
+[KEY] ||| capacity
+[KEY] ||| 4wd_only
+[KEY] ||| abutters
+[KEY] ||| access
+[KEY] ||| addr:city
+[KEY] ||| addr:country
+[KEY] ||| addr:district
+[KEY] ||| addr:flats
+[KEY] ||| addr:full
+[KEY] ||| addr:hamlet
+[KEY] ||| addr:housename
+[KEY] ||| addr:housenumber
+[KEY] ||| addr:inclusion
+[KEY] ||| addr:interpolation
+[KEY] ||| addr:place
+[KEY] ||| addr:postcode
+[KEY] ||| addr:province
+[KEY] ||| addr:state
+[KEY] ||| addr:street 
+[KEY] ||| addr:street
+[KEY] ||| addr:subdistrict
+[KEY] ||| addr:suburb
+[KEY] ||| aerialway
+[KEY] ||| aerodrome
+[KEY] ||| aeroway
+[KEY] ||| agricultural
+[KEY] ||| alt_name
+[KEY] ||| alt_name:lg
+[KEY] ||| alt_name_1
+[KEY] ||| amenity
+[KEY] ||| architect 
+[KEY] ||| area
+[KEY] ||| atm
+[KEY] ||| attribution
+[KEY] ||| atv
+[KEY] ||| barrier
+[KEY] ||| bdouble
+[KEY] ||| bicycle 
+[KEY] ||| bicycle
+[KEY] ||| bicycle_road
+[KEY] ||| boat
+[KEY] ||| boundary
+[KEY] ||| bridge
+[KEY] ||| building
+[KEY] ||| charge
+[KEY] ||| comments
+[KEY] ||| contact:diaspora
+[KEY] ||| contact:email
+[KEY] ||| contact:facebook
+[KEY] ||| contact:fax
+[KEY] ||| contact:google_plus
+[KEY] ||| contact:instagram
+[KEY] ||| contact:linkedin
+[KEY] ||| contact:phone
+[KEY] ||| contact:twitter
+[KEY] ||| contact:vhf
+[KEY] ||| contact:webcam
+[KEY] ||| contact:website
+[KEY] ||| contact:xing
+[KEY] ||| covered
+[KEY] ||| craft
+[KEY] ||| crossing
+[KEY] ||| cuisine 
+[KEY] ||| cuisine
+[KEY] ||| cutting
+[KEY] ||| cycleway
+[KEY] ||| de:place 
+[KEY] ||| de:amtlicher_gemeindeschluessel 
+[KEY] ||| denomination
+[KEY] ||| description
+[KEY] ||| diaspora
+[KEY] ||| disused
+[KEY] ||| drive_in
+[KEY] ||| drive_through
+[KEY] ||| driving_side
+[KEY] ||| ele 
+[KEY] ||| ele
+[KEY] ||| electrified
+[KEY] ||| email 
+[KEY] ||| email
+[KEY] ||| embankment
+[KEY] ||| emergency
+[KEY] ||| end_date
+[KEY] ||| est_width
+[KEY] ||| facebook
+[KEY] ||| fax
+[KEY] ||| fire_object:type
+[KEY] ||| fire_operator
+[KEY] ||| fire_rank
+[KEY] ||| fireplace
+[KEY] ||| fixme
+[KEY] ||| foot
+[KEY] ||| ford
+[KEY] ||| forestry
+[KEY] ||| frequency
+[KEY] ||| geological
+[KEY] ||| goods
+[KEY] ||| google_plus
+[KEY] ||| hazmat
+[KEY] ||| height 
+[KEY] ||| hgv
+[KEY] ||| highway 
+[KEY] ||| highway
+[KEY] ||| hiking
+[KEY] ||| historic
+[KEY] ||| horse
+[KEY] ||| iata
+[KEY] ||| icao
+[KEY] ||| ice_road
+[KEY] ||| image
+[KEY] ||| incline
+[KEY] ||| information
+[KEY] ||| inline_skates
+[KEY] ||| inscription
+[KEY] ||| instagram
+[KEY] ||| int_name
+[KEY] ||| int_ref 
+[KEY] ||| int_ref
+[KEY] ||| intermittent
+[KEY] ||| internet_access 
+[KEY] ||| internet_access
+[KEY] ||| is_in:country
+[KEY] ||| is_in
+[KEY] ||| junction
+[KEY] ||| landuse
+[KEY] ||| lanes 
+[KEY] ||| lanes
+[KEY] ||| layer
+[KEY] ||| lcn_ref
+[KEY] ||| leaf_cycle
+[KEY] ||| leaf_type
+[KEY] ||| leisure 
+[KEY] ||| leisure
+[KEY] ||| lhv
+[KEY] ||| linkedin
+[KEY] ||| lit
+[KEY] ||| loc_name
+[KEY] ||| loc_ref
+[KEY] ||| location
+[KEY] ||| lock
+[KEY] ||| man_made
+[KEY] ||| maxheight
+[KEY] ||| maxlength
+[KEY] ||| maxspeed 
+[KEY] ||| maxspeed
+[KEY] ||| maxstay
+[KEY] ||| maxweight
+[KEY] ||| maxwidth
+[KEY] ||| military
+[KEY] ||| minspeed
+[KEY] ||| mofa
+[KEY] ||| mooring
+[KEY] ||| moped
+[KEY] ||| motor_vehicle
+[KEY] ||| motorboat
+[KEY] ||| motorcar
+[KEY] ||| motorcycle
+[KEY] ||| motorroad
+[KEY] ||| mountain_pass
+[KEY] ||| mtb:description
+[KEY] ||| mtb:scale
+[KEY] ||| mtb:scale:imba
+[KEY] ||| mtb:scale:uphill
+[KEY] ||| name 
+[KEY] ||| name
+[KEY] ||| name:lg
+[KEY] ||| name:left
+[KEY] ||| name:right
+[KEY] ||| narrow
+[KEY] ||| nat_name
+[KEY] ||| nat_ref
+[KEY] ||| natural
+[KEY] ||| ncn_ref
+[KEY] ||| noexit
+[KEY] ||| note 
+[KEY] ||| note
+[KEY] ||| nudism
+[KEY] ||| office
+[KEY] ||| official_name
+[KEY] ||| old_name
+[KEY] ||| old_name:lg
+[KEY] ||| old_ref
+[KEY] ||| oneway 
+[KEY] ||| oneway
+[KEY] ||| opening_hours
+[KEY] ||| operator 
+[KEY] ||| operator
+[KEY] ||| outdoor_seating
+[KEY] ||| overtaking
+[KEY] ||| parking
+[KEY] ||| parking:condition
+[KEY] ||| parking:lane
+[KEY] ||| passing_places
+[KEY] ||| phone 
+[KEY] ||| phone
+[KEY] ||| place
+[KEY] ||| place_numbers
+[KEY] ||| population 
+[KEY] ||| population
+[KEY] ||| postal_code
+[KEY] ||| power
+[KEY] ||| psv
+[KEY] ||| public_transport
+[KEY] ||| railway
+[KEY] ||| rcn_ref
+[KEY] ||| ref 
+[KEY] ||| ref
+[KEY] ||| reference_point
+[KEY] ||| reg_name
+[KEY] ||| reg_ref
+[KEY] ||| Relation:restriction
+[KEY] ||| religion
+[KEY] ||| restaurant 
+[KEY] ||| roadtrain
+[KEY] ||| rooms 
+[KEY] ||| route
+[KEY] ||| sac_scale
+[KEY] ||| service
+[KEY] ||| service_times
+[KEY] ||| shop
+[KEY] ||| short_name
+[KEY] ||| site_type
+[KEY] ||| ski
+[KEY] ||| smoking 
+[KEY] ||| smoking
+[KEY] ||| smoothness
+[KEY] ||| sorting_name
+[KEY] ||| source
+[KEY] ||| source:name
+[KEY] ||| source:ref
+[KEY] ||| source_ref
+[KEY] ||| sport
+[KEY] ||| star 
+[KEY] ||| stars 
+[KEY] ||| stars
+[KEY] ||| start_date
+[KEY] ||| surface 
+[KEY] ||| surface
+[KEY] ||| tactile_paving
+[KEY] ||| tank
+[KEY] ||| tidal
+[KEY] ||| TMC:LocationCode
+[KEY] ||| todo
+[KEY] ||| toilets:wheelchair
+[KEY] ||| toll
+[KEY] ||| tourism
+[KEY] ||| tracks
+[KEY] ||| tracktype
+[KEY] ||| traffic_calming
+[KEY] ||| traffic_sign
+[KEY] ||| trail_visibility
+[KEY] ||| tunnel
+[KEY] ||| twitter
+[KEY] ||| url
+[KEY] ||| usage
+[KEY] ||| vehicle
+[KEY] ||| vhf
+[KEY] ||| voltage
+[KEY] ||| waterway
+[KEY] ||| webcam
+[KEY] ||| website 
+[KEY] ||| website
+[KEY] ||| wheelchair 
+[KEY] ||| wheelchair
+[KEY] ||| width
+[KEY] ||| wifi
+[KEY] ||| wikipedia 
+[KEY] ||| wikipedia
+[KEY] ||| winter_road
+[KEY] ||| xing
+[INT] ||| 0 [INT,1]
+[INT] ||| 1 [INT,1]
+[INT] ||| 2 [INT,1]
+[INT] ||| 3 [INT,1]
+[INT] ||| 4 [INT,1]
+[INT] ||| 5 [INT,1]
+[INT] ||| 6 [INT,1]
+[INT] ||| 7 [INT,1]
+[INT] ||| 8 [INT,1]
+[INT] ||| 9 [INT,1]
+[INT] ||| 0
+[INT] ||| 1
+[INT] ||| 2
+[INT] ||| 3
+[INT] ||| 4
+[INT] ||| 5
+[INT] ||| 6
+[INT] ||| 7
+[INT] ||| 8
+[INT] ||| 9
