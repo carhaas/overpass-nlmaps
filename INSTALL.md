@@ -7,6 +7,7 @@ For example on Ubuntu:
     sudo apt-get install g++ cmake expat libexpat1-dev zlib1g-dev libboost-all-dev
 
 For instructions to populate the database see: http://wiki.openstreetmap.org/wiki/Overpass_API/Installation#Populating_the_DB
+(Note that the project [https://github.com/drolbr/Overpass-API] needs to be built for the necessary scripts)
 
 Usage:
 to execute a NLmaps query (e.g. "query(nwr(keyval('amenity','exhibition_center')),qtype(findkey('name')))") run the following:
