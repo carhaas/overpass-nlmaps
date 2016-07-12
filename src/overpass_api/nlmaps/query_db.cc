@@ -62,6 +62,11 @@ int main(int argc, char** argv) {
 
     string mrl;
     while(getline(query_file, mrl)){
+      if(mrl == "no mrl found"){
+        outfile_answer << "empty" << endl;
+        outfile_latlong << "empty" << endl;
+        continue;
+      }
       NLmaps_query query_info;
       query_info.mrl = mrl;
       preprocess_mrl(&query_info);
