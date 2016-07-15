@@ -19,7 +19,7 @@ By renaming the file `Makefile_db_scripts` to `Makefile`, this can be done in th
     automake-1.11 --add-missing
     autoconf
     popd
-		../src/configure CXXFLAGS="-O3 -std=c++11" --prefix=/path/to/overpass-nlmaps
+    ../src/configure CXXFLAGS="-O3 -std=c++11" --prefix=/path/to/overpass-nlmaps
     make install
 
 Usage:
