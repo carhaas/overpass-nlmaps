@@ -7,7 +7,19 @@ For example on Ubuntu:
     sudo apt-get install g++ cmake expat libexpat1-dev zlib1g-dev libboost-all-dev
 
 For instructions to populate the database see: http://wiki.openstreetmap.org/wiki/Overpass_API/Installation#Populating_the_DB
-(Note that the project [https://github.com/drolbr/Overpass-API] needs to be built for the necessary scripts)
+Note: For the area creation a different set of scripts need to be build from the original (Overpass project)[https://github.com/drolbr/Overpass-API]
+By renaming the file `Makefile_db_scripts` to `Makefile`, this can be done in the Overpass-nlmaps folder by running the following:
+    cd osm-3s-dev-version
+    pushd src/
+    autoscan
+    aclocal-1.11
+    autoheader
+    libtoolize
+    automake-1.11 --add-missing
+    autoconf
+    popd
+		../src/configure CXXFLAGS="-O3 -std=c++11" --prefix=/path/to/overpass-nlmaps
+    make install
 
 Usage:
 to execute a NLmaps query (e.g. "query(nwr(keyval('amenity','exhibition_center')),qtype(findkey('name')))") run the following:
