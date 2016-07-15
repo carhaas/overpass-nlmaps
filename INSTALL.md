@@ -9,6 +9,7 @@ For example on Ubuntu:
 For instructions to populate the database see: http://wiki.openstreetmap.org/wiki/Overpass_API/Installation#Populating_the_DB
 Note: For the area creation a different set of scripts need to be build from the original (Overpass project)[https://github.com/drolbr/Overpass-API]
 By renaming the file `Makefile_db_scripts` to `Makefile`, this can be done in the Overpass-nlmaps folder by running the following:
+
     cd osm-3s-dev-version
     pushd src/
     autoscan
