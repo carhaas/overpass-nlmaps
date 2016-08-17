@@ -90,7 +90,8 @@ class Terminal : public Expression {
   String name;
   and_or_t and_or;
 public:
-	Terminal(String name, and_or_t const& and_or = and_or_t::UNSET) {
+  Terminal(String name, and_or_t const& and_or = and_or_t::UNSET) {
+    boost::replace_all(this->name, "\"", "\\\"");
     this->name = name;
     this->and_or = and_or;
   }
