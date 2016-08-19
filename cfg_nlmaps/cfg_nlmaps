@@ -51,7 +51,7 @@
 [VAL] ||| or( [VAL,1] , [VAL,2] )
 [VAL] ||| and( [VAL,1] , [VAL,2] )
 [VAL] ||| ' valvariable '
-[KEY] ||| ' keyvariable '
+[KEY] ||| keyvariable
 [KEY] ||| monitoring:bicycle
 [KEY] ||| fuel:diesel
 [KEY] ||| product
