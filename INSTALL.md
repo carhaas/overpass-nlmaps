@@ -25,7 +25,7 @@ By renaming the file `Makefile_db_scripts` to `Makefile`, this can be done in th
 Usage:
 to execute a NLmaps query (e.g. "query(nwr(keyval('amenity','exhibition_center')),qtype(findkey('name')))") run the following:
 
-./query_db -d $DB_DIR -a answer_file -f query_file
+``./query_db -d $DB_DIR -a answer_file -f query_file``
 
 where $DB_DIR contains the location of the database, answer_file is the location of the file which will contain the answer and query_file contains the queries to be run with each query in a separate line.
 
