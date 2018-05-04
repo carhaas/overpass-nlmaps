@@ -5,3 +5,5 @@ This project combines the Overpass-API with the NLmaps backend.
 For the Overpass part of the project see: http://wiki.osm.org/wiki/Overpass_API
 
 For the NLmaps part of the project see: http://www.cl.uni-heidelberg.de/statnlpgroup/nlmaps/
+
+For installation follow the instructions in [INSTALL.md](https://github.com/carhaas/overpass-nlmaps/blob/master/INSTALL.md)
