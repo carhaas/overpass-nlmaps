@@ -35,11 +35,16 @@ struct NLmaps_query{
   bool area = false;
   bool search = false;
   bool center = false;
+  bool center_pivot = false;
   bool pivot = false;
   bool around = false;
   bool get_center_latlong = false;
   bool geojson = false;
   bool latlon = false;
+  bool count = false;
+  bool findkey = false;
+  bool least = false;
+  bool dist = false;
   int topx = 0; //if needed for around
   string maxdist;
   string perform_nodup;
@@ -49,6 +54,8 @@ struct NLmaps_query{
   vector<OSM_element> elements;
   int count_elements = 0;
   vector<cardinal_direction_t> cardinal_directions;
+  vector<string> osm_tags;
+  vector<string> area_name;
 };
 
 #endif

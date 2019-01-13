@@ -1007,6 +1007,7 @@ void Print_Statement::tags_by_id
       } else {
         OSM_element element;
 				if(ptr_query_info->cardinal_directions.size()>0 && !ptr_query_info->get_center_latlong){
+          //cerr << "lat: " << ptr_query_info->ref_element.lat_lon.first << " lon: " << ptr_query_info->ref_element.lat_lon.second << endl;
           vector<cardinal_direction_t>& c = ptr_query_info->cardinal_directions;
           pair<double, double> lat_lon = make_pair(-1.0, -1.0);
           latlong(items_by_id[i.val()].second, *(items_by_id[i.val()].first), &lat_lon);

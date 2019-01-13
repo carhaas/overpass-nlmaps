@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <list>
+#include <numeric>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
@@ -24,6 +25,14 @@ struct Expression;
 
 enum class for_t {CAR, WALK, UNSET};
 enum class and_or_t {AND, OR, UNSET};
+
+static int prep_query(string& query){
+  boost::replace_all(query, "SAVESPACE", " ");
+  boost::replace_all(query, "SAVEAPO", "'");
+  boost::replace_all(query, "BRACKETOPEN", "(");
+  boost::replace_all(query, "BRACKETCLOSE", ")");
+  return 0;
+}
 
 static int save_stoi(string convert_this){
   int number = 0;
@@ -90,8 +99,7 @@ class Terminal : public Expression {
   String name;
   and_or_t and_or;
 public:
-  Terminal(String name, and_or_t const& and_or = and_or_t::UNSET) {
-    boost::replace_all(this->name, "\"", "\\\"");
+	Terminal(String name, and_or_t const& and_or = and_or_t::UNSET) {
     this->name = name;
     this->and_or = and_or;
   }
@@ -126,6 +134,7 @@ public:
       return "["+ptr_key->interpret(ptr_query_info)+"]";
     }
     return "["+ptr_key->interpret(ptr_query_info)+"="+ptr_val->interpret(ptr_query_info)+"]";
+
   }
   string class_name(){ return "Keyval"; }
   string key(){ return ptr_key->terminal_name(); }
@@ -151,18 +160,25 @@ public:
     for(auto it = keyvals.begin(); it != keyvals.end(); it++){ delete (*it); }
   }
   string interpret(NLmaps_query* ptr_query_info) {
-    stringstream assemble;
+    stringstream ss_assemble;
     for(auto it = keyvals.begin(); it != keyvals.end(); it++){
-      assemble << (*it)->interpret(ptr_query_info);
+      ss_assemble << (*it)->interpret(ptr_query_info);
+    }
+    if(find(ptr_query_info->osm_tags.begin(), ptr_query_info->osm_tags.end(), ss_assemble.str()) != ptr_query_info->osm_tags.end()) {
+      ;
+    } else {
+      string assembled = ss_assemble.str();
+      prep_query(assembled);
+      ptr_query_info->osm_tags.push_back(assembled);
     }
     stringstream assemble_total;
     if(first){assemble_total << "(";}
     if(ptr_query_info->area){
-      assemble_total << "node(area.a)"+assemble.str()+";way(area.a)"+assemble.str()+";relation(area.a)"+assemble.str()+";";
+      assemble_total << "node(area.a)"+ss_assemble.str()+";way(area.a)"+ss_assemble.str()+";relation(area.a)"+ss_assemble.str()+";";
     } else if(ptr_query_info->search){
-      assemble_total << "node(around.b:"+ptr_query_info->maxdist+")"+assemble.str()+";way(around.b:"+ptr_query_info->maxdist+")"+assemble.str()+";relation(around.b:"+ptr_query_info->maxdist+")"+assemble.str()+";";
+      assemble_total << "node(around.b:"+ptr_query_info->maxdist+")"+ss_assemble.str()+";way(around.b:"+ptr_query_info->maxdist+")"+ss_assemble.str()+";relation(around.b:"+ptr_query_info->maxdist+")"+ss_assemble.str()+";";
     } else {
-      assemble_total << "node"+assemble.str()+";way"+assemble.str()+";relation"+assemble.str()+";";
+      assemble_total << "node"+ss_assemble.str()+";way"+ss_assemble.str()+";relation"+ss_assemble.str()+";";
     }
     if(ptr_query_info->center && !ptr_query_info->get_center_latlong){
       assemble_total << ")->.b;";
@@ -197,11 +213,15 @@ public:
     for(auto it = keyvals.begin(); it != keyvals.end(); it++){
       ss_assemble << (*it)->interpret(ptr_query_info);
     }
-    if(ptr_query_info->pivot){
-      return "area"+ss_assemble.str()+";relation(pivot);";
+    if(find(ptr_query_info->area_name.begin(), ptr_query_info->area_name.end(), ss_assemble.str()) != ptr_query_info->area_name.end()) {
+      ;
+    } else {
+      string assembled = ss_assemble.str();
+      prep_query(assembled);
+      ptr_query_info->area_name.push_back(assembled);
     }
-    stringstream ss_assemble_total;
     string assemble = ss_assemble.str();
+    stringstream ss_assemble_total;
     size_t found_beginning = assemble.find("<nom>");
     if(found_beginning != string::npos){
       //extract relevant
@@ -209,7 +229,19 @@ public:
       size_t found_end = assemble.find("</nom>");
       assemble = assemble.substr(0, found_end);
       ss_assemble_total << "area(" << assemble << ")->.a;";//TODO is it ok to do? (cos below we handle or() etc.)
+      if(ptr_query_info->pivot){
+        return "area("+assemble+");relation(pivot);";
+      }
+      if(ptr_query_info->center_pivot){
+        return "area("+assemble+");relation(pivot)->.b;";
+      }
       return ss_assemble_total.str();
+    }
+    if(ptr_query_info->center_pivot){
+      return "area"+ss_assemble.str()+";relation(pivot)->.b;";
+    }
+    if(ptr_query_info->pivot){
+      return "area"+ss_assemble.str()+";relation(pivot);";
     }
     if(first){ ss_assemble_total << "("; }
     if(and_or == and_or_t::OR && !first){ ss_assemble_total << ";"; }
@@ -327,6 +359,7 @@ class Count : public AnswerType {
 public:
 	Count() {}
   string interpret(NLmaps_query* ptr_query_info) {
+    ptr_query_info->count = true;
     return to_string(ptr_query_info->count_elements);
   }
   string type(){ return "count"; }
@@ -340,6 +373,7 @@ public:
     this->ptr_topx = ptr_topx;
   }
   string interpret(NLmaps_query* ptr_query_info) {
+    ptr_query_info->least = true;
     if(ptr_query_info->count_elements >= save_stoi(ptr_topx->interpret(ptr_query_info))){
       return "yes";
     }
@@ -356,6 +390,7 @@ public:
     this->ptr_topx = ptr_topx;
   }
   string interpret(NLmaps_query* ptr_query_info) {
+    ptr_query_info->findkey = true;
     int topx = -1;
     if(ptr_topx != NULL){ topx = save_stoi(ptr_topx->interpret(ptr_query_info)); }
     bool first = true;
@@ -471,6 +506,7 @@ public:
   string interpret(NLmaps_query* ptr_query_info) {
     if(search){ ptr_query_info->search = true; }
     if(center){ ptr_query_info->center = true; }
+    if(center && nwrs.size() == 0){ ptr_query_info->center_pivot = true; }
     stringstream assemble;
     if(areas.size() > 0){
       ptr_query_info->area = true;
@@ -486,6 +522,7 @@ public:
     ptr_query_info->area = false; //switch back to false in case there is any other later on
     ptr_query_info->search = false;
     ptr_query_info->center = false;
+    ptr_query_info->center_pivot = false;
     return assemble.str();
   }
   string class_name(){ return "Element"; }
@@ -506,14 +543,6 @@ public:
     this->ptr_ele_ref = ptr_ele_ref;
     this->db_dir = db_dir;
     this->maxdist = maxdist;
-  }
-
-  int prep_query(string& query){
-    boost::replace_all(query, "SAVESPACE", " ");
-    boost::replace_all(query, "SAVEAPO", "'");
-    boost::replace_all(query, "BRACKETOPEN", "(");
-    boost::replace_all(query, "BRACKETCLOSE", ")");
-    return 0;
   }
 
   int set_ref_element(NLmaps_query* ptr_query_info, string& query){
@@ -581,6 +610,7 @@ public:
     this->for_what = for_what;
   }
   string interpret(NLmaps_query* ptr_query_info) {
+    ptr_query_info->dist = true;
     double distance = numeric_limits<double>::infinity();
     OSM_element element_first; element_first.lat_lon = make_pair(-1, -1);
     OSM_element element_second; element_second.lat_lon = make_pair(-1, -1);
@@ -653,7 +683,12 @@ public:
     stringstream assemble;
     bool first = true;
     string answer = "";
+    //save elements from previous queries
+    vector<OSM_element> save_elements;
     for(auto it = queries.begin(); it != queries.end(); it++){
+      for(auto it2 = ptr_query_info->elements.begin(); it2 != ptr_query_info->elements.end(); it2++){
+        save_elements.push_back((*it2));
+      }
       ptr_query_info->elements.clear();
       ptr_query_info->count_elements = 0;
       if(first){
@@ -664,6 +699,10 @@ public:
         answer = (*it)->interpret(ptr_query_info);
         assemble << " and " << answer;
       }
+    }
+    //add saved element back in
+    for(auto it = save_elements.begin(); it != save_elements.end(); it++){
+      ptr_query_info->elements.push_back((*it));
     }
     return assemble.str();
   }
