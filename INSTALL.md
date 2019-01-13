@@ -7,8 +7,10 @@ For example on Ubuntu:
     sudo apt-get install g++ cmake expat libexpat1-dev zlib1g-dev libboost-all-dev
 
 For instructions to populate the database see: http://wiki.openstreetmap.org/wiki/Overpass_API/Installation#Populating_the_DB
-Note: For the area creation a different set of scripts need to be build from the original (Overpass project)[https://github.com/drolbr/Overpass-API]
-By renaming the file `Makefile_db_scripts` to `Makefile`, this can be done in the Overpass-nlmaps folder by running the following:
+
+Note: For the area creation a different set of scripts need to be used compared to the original [Overpass project](https://github.com/drolbr/Overpass-API).
+
+For this, rename the file `Makefile_db_scripts` to `Makefile`, this can be done in the Overpass-nlmaps folder by running the following:
 
     cd osm-3s-dev-version
     pushd src/
@@ -29,7 +31,7 @@ to execute a NLmaps query (e.g. "query(nwr(keyval('amenity','exhibition_center')
 
 where $DB_DIR contains the location of the database, answer_file is the location of the file which will contain the answer and query_file contains the queries to be run with each query in a separate line.
 
-Additional one can specify "-l latlong_file" which is the location of the file which will contain the GPS location of all relevant entities (node, way or relation) found for the query.
+Additionally one can specify "-l latlong_file" which is the location of the file which will contain the GPS location of all relevant entities (node, way or relation) found for the query.
 
 To connect the backend with your own C++ project look at this file: src/overpass-api/dispatch/osm3s_query_nlmaps.cc
 Some relevant code:
