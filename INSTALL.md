@@ -33,6 +33,8 @@ where $DB_DIR contains the location of the database, answer_file is the location
 
 Additionally one can specify "-l latlong_file" which is the location of the file which will contain the GPS location of all relevant entities (node, way or relation) found for the query.
 
+Alternative, adding "-g" will write geojson information into the latlong_file instead. This information can be used by a graphical user interface to display further information about an entity.
+
 To connect the backend with your own C++ project look at this file: src/overpass-api/dispatch/osm3s_query_nlmaps.cc
 Some relevant code:
 
